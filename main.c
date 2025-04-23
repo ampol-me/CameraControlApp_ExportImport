@@ -68,15 +68,41 @@ static void on_edit_clicked(GtkButton *button, gpointer user_data) {
         gtk_grid_set_column_spacing(GTK_GRID(grid), 5);
         gtk_container_set_border_width(GTK_CONTAINER(grid), 10);
         
+        // ID
         GtkWidget *id_entry = gtk_entry_new();
         gtk_entry_set_text(GTK_ENTRY(id_entry), g_strdup_printf("%d", id));
         gtk_grid_attach(GTK_GRID(grid), gtk_label_new("ID:"), 0, 0, 1, 1);
         gtk_grid_attach(GTK_GRID(grid), id_entry, 1, 0, 1, 1);
         
+        // Name
         GtkWidget *name_entry = gtk_entry_new();
         gtk_entry_set_text(GTK_ENTRY(name_entry), name ? name : "");
         gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Name:"), 0, 1, 1, 1);
         gtk_grid_attach(GTK_GRID(grid), name_entry, 1, 1, 1, 1);
+        
+        // Pan
+        GtkWidget *pan_entry = gtk_entry_new();
+        gtk_entry_set_text(GTK_ENTRY(pan_entry), pan ? pan : "");
+        gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Pan:"), 0, 2, 1, 1);
+        gtk_grid_attach(GTK_GRID(grid), pan_entry, 1, 2, 1, 1);
+        
+        // Tilt
+        GtkWidget *tilt_entry = gtk_entry_new();
+        gtk_entry_set_text(GTK_ENTRY(tilt_entry), tilt ? tilt : "");
+        gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Tilt:"), 0, 3, 1, 1);
+        gtk_grid_attach(GTK_GRID(grid), tilt_entry, 1, 3, 1, 1);
+        
+        // Zoom
+        GtkWidget *zoom_entry = gtk_entry_new();
+        gtk_entry_set_text(GTK_ENTRY(zoom_entry), zoom ? zoom : "");
+        gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Zoom:"), 0, 4, 1, 1);
+        gtk_grid_attach(GTK_GRID(grid), zoom_entry, 1, 4, 1, 1);
+        
+        // Focus
+        GtkWidget *focus_entry = gtk_entry_new();
+        gtk_entry_set_text(GTK_ENTRY(focus_entry), focus ? focus : "");
+        gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Focus:"), 0, 5, 1, 1);
+        gtk_grid_attach(GTK_GRID(grid), focus_entry, 1, 5, 1, 1);
         
         gtk_container_add(GTK_CONTAINER(content), grid);
         gtk_widget_show_all(dialog);
@@ -84,6 +110,10 @@ static void on_edit_clicked(GtkButton *button, gpointer user_data) {
         if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
             int new_id = atoi(gtk_entry_get_text(GTK_ENTRY(id_entry)));
             const char *new_name = gtk_entry_get_text(GTK_ENTRY(name_entry));
+            const char *new_pan = gtk_entry_get_text(GTK_ENTRY(pan_entry));
+            const char *new_tilt = gtk_entry_get_text(GTK_ENTRY(tilt_entry));
+            const char *new_zoom = gtk_entry_get_text(GTK_ENTRY(zoom_entry));
+            const char *new_focus = gtk_entry_get_text(GTK_ENTRY(focus_entry));
             const char *ip = gtk_entry_get_text(data->ip_entry);
             
             if (strcmp(ip, "localhost") == 0) {
@@ -95,7 +125,15 @@ static void on_edit_clicked(GtkButton *button, gpointer user_data) {
                         if (list->presets[i].id == id) {
                             list->presets[i].id = new_id;
                             strncpy(list->presets[i].name, new_name, sizeof(list->presets[i].name) - 1);
+                            strncpy(list->presets[i].pan, new_pan, sizeof(list->presets[i].pan) - 1);
+                            strncpy(list->presets[i].tilt, new_tilt, sizeof(list->presets[i].tilt) - 1);
+                            strncpy(list->presets[i].zoom, new_zoom, sizeof(list->presets[i].zoom) - 1);
+                            strncpy(list->presets[i].focus, new_focus, sizeof(list->presets[i].focus) - 1);
                             list->presets[i].name[sizeof(list->presets[i].name) - 1] = '\0';
+                            list->presets[i].pan[sizeof(list->presets[i].pan) - 1] = '\0';
+                            list->presets[i].tilt[sizeof(list->presets[i].tilt) - 1] = '\0';
+                            list->presets[i].zoom[sizeof(list->presets[i].zoom) - 1] = '\0';
+                            list->presets[i].focus[sizeof(list->presets[i].focus) - 1] = '\0';
                             break;
                         }
                     }
@@ -110,7 +148,7 @@ static void on_edit_clicked(GtkButton *button, gpointer user_data) {
                 if (camera_set_preset(ip,
                                    gtk_entry_get_text(data->user_entry),
                                    gtk_entry_get_text(data->pass_entry),
-                                   new_id, new_name)) {
+                                   new_id, new_name, new_pan, new_tilt, new_zoom, new_focus)) {
                     on_refresh_clicked(button, user_data);
                 }
             }

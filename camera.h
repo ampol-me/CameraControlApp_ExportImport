@@ -22,7 +22,8 @@ CameraPresetList* camera_get_presets(const char *ip, const char *user, const cha
 int camera_clone_preset(const char *ip, const char *user, const char *pass, int from_id, int to_id);
 
 // ฟังก์ชันสำหรับตั้งค่า preset ใหม่
-int camera_set_preset(const char *ip, const char *user, const char *pass, int id, const char *name);
+int camera_set_preset(const char *ip, const char *user, const char *pass, int id, const char *name, 
+                     const char *pan, const char *tilt, const char *zoom, const char *focus);
 
 // ฟังก์ชันสำหรับลบ preset
 int camera_clear_preset(const char *ip, const char *user, const char *pass, int id);

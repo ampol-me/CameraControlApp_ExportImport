@@ -100,10 +100,11 @@ int camera_clone_preset(const char *ip, const char *user, const char *pass, int 
     return 1;
 } 
 
-int camera_set_preset(const char *ip, const char *user, const char *pass, int id, const char *name) {
+int camera_set_preset(const char *ip, const char *user, const char *pass, int id, const char *name,
+                     const char *pan, const char *tilt, const char *zoom, const char *focus) {
     char url[256];
-    snprintf(url, sizeof(url), "http://%s/command/presetposition.cgi?PresetSet=%d,%s,off", 
-             ip, id, name);
+    snprintf(url, sizeof(url), "http://%s/command/presetposition.cgi?PresetSet=%d,%s,%s,%s,%s,%s,off", 
+             ip, id, name, pan, tilt, zoom, focus);
     
     char *response = http_get(url, user, pass);
     if (!response) return 0;
