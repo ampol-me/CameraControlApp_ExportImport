@@ -98,7 +98,7 @@ int camera_clone_preset(const char *ip, const char *user, const char *pass, int 
     
     free(response);
     return 1;
-}
+} 
 
 int camera_set_preset(const char *ip, const char *user, const char *pass, int id, const char *name) {
     char url[256];

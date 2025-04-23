@@ -56,3 +56,9 @@ Parameter = PresetNum
 Returns the maximum number of the supported
 Preset Positions. The value is an integer and depending on the
 specification of a model.
+
+
+
+
+
+pacman -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-json-c mingw-w64-x86_64-curl mingw-w64-x86_64-gcc make
