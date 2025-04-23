@@ -1,0 +1,58 @@
+3.9.1. call
+SetCGI: command/presetposition.cgi?Parameter=Value
+Parameter = PresetCall
+Calls one of the registered preset positions as PresetCall=Value1,Value2.
+[Value1] 1 to PresetNum : the registration ID number of preset position 1 to PresetNum
+[Value2] 1 to PanTiltMaxVelocity : the movement speed defined by PanTiltMaxVelocity (given by an integer)
+: the slowest
+: the fastest
+
+3.9.3. clear
+SetCGI: command/presetposition.cgi?Parameter=Value
+Parameter = PresetClear 
+Set 1 to PresetNum Clears the preset position corresponding to the
+specified registration ID number.
+
+3.9.3. set
+SetCGI: command/presetposition.cgi?Parameter=Value
+Parameter = PresetSet
+Registers the current PTZF position as a preset position In the form of PresetSet=Value1,Value2,Value3.
+[Value1] the registration ID number of preset position 1 PresetSet Set to PresetNum
+[Value2] 0 to 32 characters the name of the preset position
+[Value3] on/offwhether to use the current camera image as a thumbnail : use : non-use
+
+3.9.4. preset_name
+SetCGI: command/presetposition.cgi?Parameter=Value
+InqParam: command/inquiry.cgi?inq=presetposition
+Parameter = PresetName
+Sets the names of registered preset positions in sequence as PresetSet=Value11,Value21[,Value12,Value22,…].
+[Value1] 1 to PresetNum : the registration ID number of preset position
+[Value2] 0 to 32 characters : the name of the preset position
+
+3.9.5. home_property
+InqParam: command/inquiry.cgi?inq=presetposition
+Parameter = HomePosProperty 
+Returns the information of PTZ home position as HomePosProperty=Value1,Value2,Value3.
+[Value1] Pan position defined by PanMovementRange (given by a signed hexadecimal value)
+[Value2] Tilt position defined by TiltMovementRange (given by a signed hexadecimal value)
+[Value3] Zoom position defined by ZoomMovementRange (given by a signed hexadecimal value)
+
+3.9.6. preset_conf
+InqParam: command/inquiry.cgi?inq=presetposition
+Parameter = PresetPos
+Returns all the information of registered preset positions in sequence as
+PresetPos=Value11,Value21,Value31,Value41,Value51,Value61[,Value12,Value22,Value32,Value
+42,Value52,Value62,…].
+[Value1] 1 to PresetNum : the registration ID number of preset position
+[Value2] 0 to 32 characters : the name of the preset position
+[Value3] the pan position defined by PanMovementRange (given by a signed hexadecimal value)
+[Value4] the tilt position defined by TiltMovementRange (given by a signed hexadecimal value)
+[Value5] the zoom position defined by ZoomMovementRange (given by a signed hexadecimal value)
+[Value6] the focus position (given by an unsigned hexadecimal value)
+
+3.9.7. preset_define
+InqParam: command/inquiry.cgi?inq=presetposition
+Parameter = PresetNum
+Returns the maximum number of the supported
+Preset Positions. The value is an integer and depending on the
+specification of a model.

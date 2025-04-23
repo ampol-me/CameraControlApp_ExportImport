@@ -1,0 +1,18 @@
+[
+  {
+    "id":1,
+    "name":"Wide Shot",
+    "pan":"0x10",
+    "tilt":"0x20",
+    "zoom":"0x30",
+    "focus":"0x40"
+  },
+  {
+    "id":2,
+    "name":"Close Up",
+    "pan":"0x11",
+    "tilt":"0x21",
+    "zoom":"0x31",
+    "focus":"0x41"
+  }
+]
